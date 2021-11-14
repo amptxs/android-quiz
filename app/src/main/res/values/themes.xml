@@ -1,0 +1,38 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Androidquiz" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/main_back</item>
+        <item name="colorPrimaryVariant">@color/main_back</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/main_items_back</item>
+        <item name="colorSecondaryVariant">@color/main_items_back</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="actionBarStyle">@style/Custom.ActionBar</item>
+    </style>
+
+    <style name="Custom.ActionBar" parent="Widget.MaterialComponents.ActionBar.Solid">
+        <item name="titleTextStyle">@style/ActionBar.Label.Style</item>
+        <item name="contentInsetStart">25sp</item>
+        <item name="height">62sp</item>
+        <item name="background">@drawable/actionbar_bottomline</item>
+    </style>
+    <style name="ActionBar.Label.Style" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">23sp</item>
+    </style>
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+
+</resources>
