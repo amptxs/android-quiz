@@ -15,13 +15,41 @@
         android:background="@drawable/bottom_navigation_topline"
         android:padding="3sp"
         app:itemIconSize="26dp"
+        app:itemIconTint="@drawable/bottom_navigation_items"
         app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
         app:itemTextAppearanceInactive="@style/BottomNavigationView"
-        app:itemIconTint="@drawable/bottom_navigation_items"
         app:itemTextColor="@drawable/bottom_navigation_items"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation" />
+
+    <TextView
+        android:id="@+id/quizMainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="25sp"
+        android:paddingTop="10sp"
+        android:paddingRight="25sp"
+        android:paddingBottom="10sp"
+        android:text="@string/quiz_introduction"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/quizActionButton"
+        style="@style/styledButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+
+        android:layout_marginEnd="25dp"
+        android:text="@string/start_game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quizMainText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
