@@ -13,4 +13,6 @@
     <color name="element_active">#f1d147</color>
     <color name="element_inactive">#888888</color>
     <color name="borderLine">#434343</color>
+    <color name="correct">#609a30</color>
+    <color name="incorrect">#b32238</color>
 </resources>

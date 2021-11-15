@@ -13,13 +13,34 @@
         android:id="@+id/quiz_answers"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toTopOf="@+id/quizActionButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quizMainText">
 
+        <TextView
+            android:id="@+id/correctAnnotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_annotation"
+            android:backgroundTint="@color/correct"
+            android:elevation="10dp"
+            android:paddingLeft="15sp"
+            android:paddingTop="3sp"
+            android:paddingRight="15sp"
+            android:paddingBottom="3sp"
+            android:text="Ваш выбор"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="@+id/quiz_var_a"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:id="@+id/quiz_var_a"
+            style="@style/styledQuizVarButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="Button"
@@ -30,6 +51,7 @@
 
         <Button
             android:id="@+id/quiz_var_b"
+            style="@style/styledQuizVarButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="Button"
@@ -40,6 +62,7 @@
 
         <Button
             android:id="@+id/quiz_var_c"
+            style="@style/styledQuizVarButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="Button"
@@ -50,6 +73,7 @@
 
         <Button
             android:id="@+id/quiz_var_d"
+            style="@style/styledQuizVarButton"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="Button"
@@ -80,28 +104,46 @@
         android:id="@+id/quizMainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="25sp"
+        android:paddingLeft="15sp"
         android:paddingTop="10sp"
-        android:paddingRight="25sp"
+        android:paddingRight="15sp"
         android:paddingBottom="10sp"
         android:text="@string/quiz_introduction"
         android:textColor="@color/white"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/quizProgressText" />
 
     <Button
         android:id="@+id/quizActionButton"
         style="@style/styledButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-
-        android:layout_marginEnd="25dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:text="@string/start_game"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/quizProgressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/button_round40dp"
+        android:backgroundTint="@color/element_active"
+        android:paddingLeft="10sp"
+        android:paddingTop="2sp"
+        android:paddingRight="10sp"
+        android:paddingBottom="2sp"
+        android:text="000"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

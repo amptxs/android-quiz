@@ -3,8 +3,10 @@
     <string name="chat">Чат</string>
     <string name="quiz">Викторина</string>
     <string name="proceed">Продолжить</string>
+    <string name="question">Вопрос</string>
 
     <string name="start_game">Начать игру</string>
+    <string name="your_answer">Ваш ответ</string>
 
     <string name="quiz_introduction">
         Предлагаем вам сыграть в нашу юбилейную викторину,
