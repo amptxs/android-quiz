@@ -8,31 +8,29 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
-import com.example.android_quiz.MainActivity
 import com.example.android_quiz.R
 import com.example.android_quiz.models.Question
-import kotlinx.android.synthetic.main.activity_main.*
 import android.text.SpannableString
 import android.text.Spannable
 import android.text.style.AbsoluteSizeSpan
 import com.example.android_quiz.fragments.QuizFragment
-import com.google.android.material.internal.ContextUtils.getActivity
-import kotlinx.android.synthetic.main.fragment_quiz.*
 import kotlinx.android.synthetic.main.fragment_quiz.view.*
 
 class QuizController {
-    var _parentActivity: View = QuizFragment.RootView!!
+    private val _parentActivity: View = QuizFragment.RootView!!
     private val _arrayOfAnswerButtons = arrayOf(_parentActivity.quiz_var_a, _parentActivity.quiz_var_b,
         _parentActivity.quiz_var_c,_parentActivity.quiz_var_d)
     private var _questionsList: MutableList<Question> = mutableListOf()
-    var _correctAnswers: Int = 0
+    private var _correctAnswers: Int = 0
     private var _currentQuestion: Question? = null
     private var _currentQuestionNumber: Int = 0
 
 
     fun bind(questionsList: MutableList<Question>) {
         _questionsList = questionsList
+
         firstStage()
+
         _parentActivity.quizActionButton.setOnClickListener {
                 secondStage()
         }
@@ -47,7 +45,7 @@ class QuizController {
         _parentActivity.quiz_answers.isVisible = true
         _parentActivity.quizProgressText.isGone = false
 
-        buttonInactiveCondition()
+        buttonCondition(false)
         _parentActivity.quizActionButton.text = _parentActivity.resources.getString(R.string.proceed)
 
         if (_currentQuestionNumber != _questionsList.size)
@@ -105,50 +103,36 @@ class QuizController {
             marginEnd = 6
         }
 
-        if (_currentQuestion!!.VarArray.indexOf((view as Button).text) == _currentQuestion!!.Correct)
-        {
-            correctAnswer()
+        checkAnswer(_currentQuestion!!.VarArray.indexOf((view as Button).text) == _currentQuestion!!.Correct)
+        buttonCondition(true)
+    }
+
+    private fun buttonCondition(active: Boolean){
+        _parentActivity.quizActionButton.isEnabled = active
+        if (active)
+            _parentActivity.quizActionButton.setTextColor(_parentActivity.resources.getColor(R.color.black))
+        else
+            _parentActivity.quizActionButton.setTextColor(_parentActivity.resources.getColor(R.color.element_inactive))
+        answersButtonCondition(!active)
+    }
+
+
+    private fun answersButtonCondition(active: Boolean)
+    {
+        for (button in _arrayOfAnswerButtons)
+            button.isEnabled = active
+        _parentActivity.correctAnnotation.isVisible = !active
+    }
+
+    private fun checkAnswer(correct: Boolean){
+        _currentQuestionNumber++
+        if (correct) {
+            _correctAnswers++
+            _parentActivity.correctAnnotation.backgroundTintList =
+                ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.correct))
         }
         else
-            incorrectAnswer()
-
-        _currentQuestionNumber++
-        buttonActiveCondition()
+            _parentActivity.correctAnnotation.backgroundTintList = ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.incorrect))
     }
 
-    private fun buttonActiveCondition(){
-        _parentActivity.quizActionButton.isEnabled = true
-        _parentActivity.quizActionButton.setTextColor(_parentActivity.resources.getColor(R.color.black))
-        answersButtonInactiveCondition()
-    }
-
-    private fun buttonInactiveCondition(){
-        _parentActivity.quizActionButton.isEnabled = false
-        _parentActivity.quizActionButton.setTextColor(_parentActivity.resources.getColor(R.color.element_inactive))
-        answersButtonActiveCondition()
-    }
-
-    private fun answersButtonActiveCondition()
-    {
-        for (button in _arrayOfAnswerButtons)
-            button.isEnabled = true
-
-        _parentActivity.correctAnnotation.isVisible = false
-    }
-    private fun answersButtonInactiveCondition()
-    {
-        for (button in _arrayOfAnswerButtons)
-            button.isEnabled = false
-
-        _parentActivity.correctAnnotation.isVisible = true
-    }
-
-    private fun correctAnswer(){
-        _correctAnswers++
-        _parentActivity.correctAnnotation.backgroundTintList = ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.correct))
-    }
-
-    private fun incorrectAnswer(){
-        _parentActivity.correctAnnotation.backgroundTintList = ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.incorrect))
-    }
 }

@@ -10,21 +10,9 @@ import com.example.android_quiz.R
 import com.example.android_quiz.controllers.QuizController
 import com.example.android_quiz.models.Question
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [QuizFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class QuizFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
 
     companion object{
         var QuestionsList: MutableList<Question> = mutableListOf()
@@ -38,10 +26,6 @@ class QuizFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (savedInstanceState != null) {
-            quizController.bind(QuestionsList)
-        }
-
         var test1 = Question()
         var test2 = Question()
         test1.Label = "В каком городе лисицы живут на окраинах и иногда появляются в центре?"
@@ -50,7 +34,6 @@ class QuizFragment : Fragment() {
         QuestionsList.add(test2)
 
         getString(R.string.proceed)
-
     }
 
     override fun onCreateView(
@@ -66,10 +49,5 @@ class QuizFragment : Fragment() {
         return rootView
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-
-    }
 
 }
