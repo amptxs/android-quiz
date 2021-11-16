@@ -18,6 +18,8 @@
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/androidquiz/app/src/main/res/drawable/nav_quiz.xml" value="0.2703125" />
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/androidquiz/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/androidquiz/app/src/main/res/layout/bottomnav.xml" value="0.21105072463768115" />
+        <entry key="..\:/Users/Alexander/AndroidStudioProjects/androidquiz/app/src/main/res/layout/fragment_chat.xml" value="0.19701086956521738" />
+        <entry key="..\:/Users/Alexander/AndroidStudioProjects/androidquiz/app/src/main/res/layout/fragment_quiz.xml" value="0.19701086956521738" />
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/androidquiz/app/src/main/res/menu/bottom_navigation.xml" value="0.25416666666666665" />
       </map>
     </option>

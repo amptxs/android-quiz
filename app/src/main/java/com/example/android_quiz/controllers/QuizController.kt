@@ -15,13 +15,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.text.SpannableString
 import android.text.Spannable
 import android.text.style.AbsoluteSizeSpan
+import com.example.android_quiz.fragments.QuizFragment
+import com.google.android.material.internal.ContextUtils.getActivity
+import kotlinx.android.synthetic.main.fragment_quiz.*
+import kotlinx.android.synthetic.main.fragment_quiz.view.*
 
 class QuizController {
-    private val _parentActivity = MainActivity.instance!!
+    var _parentActivity: View = QuizFragment.RootView!!
     private val _arrayOfAnswerButtons = arrayOf(_parentActivity.quiz_var_a, _parentActivity.quiz_var_b,
         _parentActivity.quiz_var_c,_parentActivity.quiz_var_d)
     private var _questionsList: MutableList<Question> = mutableListOf()
-    private var _correctAnswers: Int = 0
+    var _correctAnswers: Int = 0
     private var _currentQuestion: Question? = null
     private var _currentQuestionNumber: Int = 0
 
@@ -44,7 +48,7 @@ class QuizController {
         _parentActivity.quizProgressText.isGone = false
 
         buttonInactiveCondition()
-        _parentActivity.quizActionButton.text = _parentActivity.getString(R.string.proceed)
+        _parentActivity.quizActionButton.text = _parentActivity.resources.getString(R.string.proceed)
 
         if (_currentQuestionNumber != _questionsList.size)
             constructQuestionDisplay(_questionsList[_currentQuestionNumber])
@@ -57,7 +61,7 @@ class QuizController {
         _parentActivity.quizActionButton.isVisible = false
 
         _parentActivity.quizProgressText.background = null
-        _parentActivity.quizProgressText.setTextColor(_parentActivity.getColor(R.color.white))
+        _parentActivity.quizProgressText.setTextColor(_parentActivity.resources.getColor(R.color.white))
 
         val span: Spannable = SpannableString("\n🎉 \nПоздравляем!")
         span.setSpan(AbsoluteSizeSpan(160, true), 1, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -82,7 +86,7 @@ class QuizController {
         _currentQuestion = question
         val number = _questionsList.indexOf(question) + 1
         _parentActivity.quizProgressText.text =
-            _parentActivity.getString(R.string.question) + " "+ number + "/" + _questionsList.size
+            _parentActivity.resources.getString(R.string.question) + " "+ number + "/" + _questionsList.size
 
         _parentActivity.quizMainText.text = question.Label
 
@@ -114,13 +118,13 @@ class QuizController {
 
     private fun buttonActiveCondition(){
         _parentActivity.quizActionButton.isEnabled = true
-        _parentActivity.quizActionButton.setTextColor(_parentActivity.getColor(R.color.black))
+        _parentActivity.quizActionButton.setTextColor(_parentActivity.resources.getColor(R.color.black))
         answersButtonInactiveCondition()
     }
 
     private fun buttonInactiveCondition(){
         _parentActivity.quizActionButton.isEnabled = false
-        _parentActivity.quizActionButton.setTextColor(_parentActivity.getColor(R.color.element_inactive))
+        _parentActivity.quizActionButton.setTextColor(_parentActivity.resources.getColor(R.color.element_inactive))
         answersButtonActiveCondition()
     }
 
@@ -141,10 +145,10 @@ class QuizController {
 
     private fun correctAnswer(){
         _correctAnswers++
-        _parentActivity.correctAnnotation.backgroundTintList = ColorStateList.valueOf(_parentActivity.getColor(R.color.correct))
+        _parentActivity.correctAnnotation.backgroundTintList = ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.correct))
     }
 
     private fun incorrectAnswer(){
-        _parentActivity.correctAnnotation.backgroundTintList = ColorStateList.valueOf(_parentActivity.getColor(R.color.incorrect))
+        _parentActivity.correctAnnotation.backgroundTintList = ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.incorrect))
     }
 }
