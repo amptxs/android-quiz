@@ -9,6 +9,11 @@
     <string name="your_answer">Ваш ответ</string>
     <string name="your_name">Ваше имя</string>
     <string name="message">Сообщение</string>
+    <string name="your_message">Ваше сообщение</string>
+    <string name="attach_image">Прикрепить фото...</string>
+
+    <string name="name_hint">Введите ваше имя</string>
+    <string name="message_hint">Можете написать краткое предложение про любимых животных!</string>
 
     <string name="quiz_introduction">
         Предлагаем вам сыграть в нашу юбилейную викторину,

@@ -1,13 +1,17 @@
 package com.example.android_quiz.fragments
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.android_quiz.NewMessageActivity
 import com.example.android_quiz.R
-import com.example.android_quiz.adapters.RecyclerViewChat
+import com.example.android_quiz.adapters.RecyclerViewChatAdapter
 import com.example.android_quiz.models.Message
 import kotlinx.android.synthetic.main.fragment_chat.*
 
@@ -19,12 +23,21 @@ class ChatFragment : Fragment() {
     }
 
     private val recyclerAdapter by lazy{
-        RecyclerViewChat()
+        RecyclerViewChatAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        RootView = inflater.inflate(R.layout.fragment_chat, container, false)
+        return RootView
     }
 
     override fun onStart() {
@@ -56,13 +69,15 @@ class ChatFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        RootView = inflater.inflate(R.layout.fragment_chat, container, false)
-        return RootView
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.newMessageButton -> {
+                val intent = Intent(context, NewMessageActivity::class.java)
+                ActivityCompat.startActivityForResult(activity as Activity, intent, 1, null)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 

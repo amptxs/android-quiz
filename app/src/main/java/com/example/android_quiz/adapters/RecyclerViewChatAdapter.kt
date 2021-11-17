@@ -1,6 +1,5 @@
 package com.example.android_quiz.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import com.example.android_quiz.R
 import com.example.android_quiz.models.Message
 import kotlinx.android.synthetic.main.cardview_message.view.*
 
-class RecyclerViewChat: RecyclerView.Adapter<RecyclerViewChat.ViewHolder>() {
+class RecyclerViewChatAdapter: RecyclerView.Adapter<RecyclerViewChatAdapter.ViewHolder>() {
     var items: MutableList<Message> = mutableListOf()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

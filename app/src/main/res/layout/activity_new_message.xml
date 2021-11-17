@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_back"
+    android:paddingLeft="15sp"
+    android:paddingTop="10sp"
+    android:paddingRight="15sp"
+    tools:context=".NewMessageActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/name_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:background="@drawable/shape_round10dp_bottomline"
+        android:paddingLeft="15sp"
+        android:paddingTop="10sp"
+        android:paddingRight="15sp"
+        android:paddingBottom="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/editText_Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:hint="@string/name_hint"
+            android:inputType="textMultiLine|textPersonName"
+            android:maxLength="28"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_color"
+            android:textSize="19sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Name" />
+
+        <TextView
+            android:id="@+id/textView_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_name"
+            android:textColor="@color/element_inactive"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/message_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/shape_round10dp_bottomline"
+        android:paddingLeft="15sp"
+        android:paddingTop="10sp"
+        android:paddingRight="15sp"
+        android:paddingBottom="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_layout">
+
+        <EditText
+            android:id="@+id/editText_Message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:hint="@string/message_hint"
+            android:inputType="textMultiLine|textPersonName"
+            android:lines="4"
+            android:maxLength="150"
+            android:maxLines="4"
+            android:textColor="@color/white"
+            android:textColorHint="@color/hint_color"
+            android:textSize="19sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Message" />
+
+        <TextView
+            android:id="@+id/textView_Message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_message"
+            android:textColor="@color/element_inactive"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/button"
+        style="@style/styledAttachImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:strokeColor="@color/element_active"
+        android:text="@string/attach_image"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:icon="@drawable/ic_add"
+        app:iconTint="@color/element_active"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

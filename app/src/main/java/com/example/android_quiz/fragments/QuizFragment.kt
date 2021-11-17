@@ -49,6 +49,7 @@ class QuizFragment : Fragment() {
         return RootView
     }
 
+
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden)

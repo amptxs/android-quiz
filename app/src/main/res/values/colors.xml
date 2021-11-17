@@ -15,4 +15,5 @@
     <color name="borderLine">#434343</color>
     <color name="correct">#609a30</color>
     <color name="incorrect">#b32238</color>
+    <color name="hint_color">#696969</color>
 </resources>
