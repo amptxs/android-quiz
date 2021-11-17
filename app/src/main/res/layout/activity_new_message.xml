@@ -10,6 +10,19 @@
     android:paddingRight="15sp"
     tools:context=".NewMessageActivity">
 
+    <Button
+        android:id="@+id/button_sendMessage"
+        style="@style/styledButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="5dp"
+        android:enabled="false"
+        android:text="@string/send_message"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/name_layout"
         android:layout_width="0dp"
@@ -95,12 +108,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_AttachImage"
         style="@style/styledAttachImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:strokeColor="@color/element_active"
         android:text="@string/attach_image"
         android:textAllCaps="false"
         android:textSize="18sp"
@@ -108,5 +120,18 @@
         app:iconTint="@color/element_active"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message_layout" />
+
+    <ImageView
+        android:id="@+id/imageView_newMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/shape_round20dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_sendMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_AttachImage"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
