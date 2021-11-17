@@ -45,7 +45,7 @@ class QuizController {
         _parentActivity.quiz_answers.isVisible = true
         _parentActivity.quizProgressText.isGone = false
 
-        buttonCondition(false)
+        actionButtonCondition(false)
         _parentActivity.quizActionButton.text = _parentActivity.resources.getString(R.string.proceed)
 
         if (_currentQuestionNumber != _questionsList.size)
@@ -103,36 +103,38 @@ class QuizController {
             marginEnd = 6
         }
 
-        checkAnswer(_currentQuestion!!.VarArray.indexOf((view as Button).text) == _currentQuestion!!.Correct)
-        buttonCondition(true)
+        _currentQuestionNumber++
+
+        val isCorrect = _currentQuestion!!.isCorrect((view as Button).text.toString())
+
+        if (isCorrect) {
+            _correctAnswers++
+            _parentActivity.correctAnnotation.backgroundTintList =
+                ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.correct))
+        }
+        else
+            _parentActivity.correctAnnotation.backgroundTintList =
+                ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.incorrect))
+
+        actionButtonCondition(true)
     }
 
-    private fun buttonCondition(active: Boolean){
+    private fun actionButtonCondition(active: Boolean){
         _parentActivity.quizActionButton.isEnabled = active
         if (active)
             _parentActivity.quizActionButton.setTextColor(_parentActivity.resources.getColor(R.color.black))
         else
             _parentActivity.quizActionButton.setTextColor(_parentActivity.resources.getColor(R.color.element_inactive))
-        answersButtonCondition(!active)
+        answersButtonsCondition(!active)
     }
 
-
-    private fun answersButtonCondition(active: Boolean)
+    private fun answersButtonsCondition(active: Boolean)
     {
         for (button in _arrayOfAnswerButtons)
             button.isEnabled = active
         _parentActivity.correctAnnotation.isVisible = !active
     }
 
-    private fun checkAnswer(correct: Boolean){
-        _currentQuestionNumber++
-        if (correct) {
-            _correctAnswers++
-            _parentActivity.correctAnnotation.backgroundTintList =
-                ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.correct))
-        }
-        else
-            _parentActivity.correctAnnotation.backgroundTintList = ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.incorrect))
-    }
+
 
 }

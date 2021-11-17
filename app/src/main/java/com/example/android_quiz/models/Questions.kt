@@ -6,4 +6,8 @@ class Question(label:String,varArray: Array<String>,correct:Int) {
     var Label = label
     var VarArray = varArray
     var Correct = correct
+
+    fun isCorrect(answer: String): Boolean{
+        return (VarArray.indexOf(answer) == Correct)
+    }
 }

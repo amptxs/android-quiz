@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.example.android_quiz.MainActivity
 import com.example.android_quiz.R
 import com.example.android_quiz.controllers.QuizController
@@ -25,6 +26,7 @@ class QuizFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(false)
 
         var test1 = Question()
         var test2 = Question()
@@ -33,7 +35,6 @@ class QuizFragment : Fragment() {
         QuestionsList.add(test1)
         QuestionsList.add(test2)
 
-        getString(R.string.proceed)
     }
 
     override fun onCreateView(
@@ -41,13 +42,17 @@ class QuizFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        var rootView = inflater.inflate(R.layout.fragment_quiz, container, false)
-        RootView = rootView
+        RootView = inflater.inflate(R.layout.fragment_quiz, container, false)
 
         quizController.bind(QuestionsList)
 
-        return rootView
+        return RootView
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden)
+            (requireActivity() as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.quiz)
+    }
 
 }

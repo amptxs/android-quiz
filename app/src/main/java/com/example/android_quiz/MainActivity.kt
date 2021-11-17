@@ -20,38 +20,39 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setNavigation()
     }
 
-    private fun setNavigation(){
-        bottomNavView.selectedItemId = R.id.nav_quiz
+    override fun onStart() {
+        super.onStart()
 
-        supportFragmentManager.beginTransaction().add(R.id.fragment_container, chatFragment).commit()
+        setFragment(chatFragment)
+    }
+
+    private fun setNavigation(){
         supportFragmentManager.beginTransaction().add(R.id.fragment_container, quizFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fragment_container, chatFragment).commit()
 
         bottomNavView.setOnItemSelectedListener { item ->
             var selectedFragment: Fragment? = null
 
             when (item.itemId) {
-                R.id.nav_chat -> {
-                    selectedFragment = chatFragment
-                    title = resources.getString(R.string.chat)
-                }
-                R.id.nav_quiz -> {
-                    selectedFragment = quizFragment
-                    title = resources.getString(R.string.quiz)
-                }
+                R.id.nav_chat -> selectedFragment = chatFragment
+                R.id.nav_quiz -> selectedFragment = quizFragment
             }
 
-            for (frag in supportFragmentManager.fragments)
-                supportFragmentManager.beginTransaction().hide(frag).commit()
-
-            supportFragmentManager.beginTransaction().show(selectedFragment!!).commit()
-
+            setFragment(selectedFragment!!)
             true
         }
     }
+
+    private fun setFragment(fragment: Fragment){
+        for (frag in supportFragmentManager.fragments)
+            supportFragmentManager.beginTransaction().hide(frag).commit()
+
+        supportFragmentManager.beginTransaction().show(fragment!!).commit()
+    }
+
 
 
 }
