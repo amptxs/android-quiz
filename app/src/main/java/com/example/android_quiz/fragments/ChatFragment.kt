@@ -9,7 +9,12 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.AutoMigration
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.android_quiz.*
+import com.example.android_quiz.DAO.MessageDAO
 import com.example.android_quiz.adapters.RecyclerViewChatAdapter
 import com.example.android_quiz.models.Message
 import kotlinx.android.synthetic.main.fragment_chat.*
@@ -20,15 +25,28 @@ class ChatFragment : Fragment() {
     private val recyclerAdapter by lazy{
         RecyclerViewChatAdapter()
     }
+    private val dataBase by lazy {
+        Room.databaseBuilder(
+            requireContext(),
+            AppDatabase::class.java, "database-name"
+        ).allowMainThreadQueries().build()
+        //fallbackToDestructiveMigration()
+    }
+
+    @Database(entities = [Message::class], version = 1)
+    abstract class AppDatabase : RoomDatabase() {
+        abstract fun messageDAO(): MessageDAO
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
-        recyclerAdapter.add(Message("Иван Иванович", "Лиси́ца — это хищное млекопитающее, относится к отряду хищные, семейству псовые. Латинское название рода лисицы, по всей видимости, произошло от искаженных слов: латинского «lupus» и немецкого «Wolf»", null))
-        recyclerAdapter.add(Message("Сергей Сергеевич", "Лисица распространена весьма широко: на всей территории Европы, Северной Африки (Египет, Алжир, Марокко, северный Тунис), большей части Азии (вплоть до северной Индии, южного Китая и Индокитая), в Северной Америке от арктической зоны до северного побережья Мексиканского залива.", null))
-        recyclerAdapter.add(Message("Александр Александрович", "Окраска и размеры лисиц различны в разных местностях; всего насчитывают 40 — 50 подвидов, не учитывая более мелких форм.", BitmapFactory.decodeResource(getResources(),R.drawable.image_fox)))
-    }
+        val messages = dataBase.messageDAO().getAll()
+        for (message in messages)
+            recyclerAdapter.add(message)
+       }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,10 +96,11 @@ class ChatFragment : Fragment() {
         when (resultCode) {
             1 -> {
                 val message = data?.getSerializableExtra(EXTRA_MESSAGE_BACK) as Message
-                val uri = data?.extras!!.get(EXTRA_URI_BACK) as Uri
-                message.Image =
-                    MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
+                if (data?.extras!!.get(EXTRA_URI_BACK) != null) {
+                    message.Image = data?.extras!!.get(EXTRA_URI_BACK) as String
+                }
                 recyclerAdapter.add(message)
+                dataBase.messageDAO().insertAll(message)
             }
         }
     }

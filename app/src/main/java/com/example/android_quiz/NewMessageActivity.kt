@@ -6,6 +6,9 @@ import android.view.MenuItem
 import androidx.core.widget.doOnTextChanged
 import kotlinx.android.synthetic.main.activity_new_message.*
 import android.content.Intent
+import android.content.Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
+import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
 import com.example.android_quiz.models.Message
@@ -63,6 +66,7 @@ class NewMessageActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             uri = data?.data
+
             imageView_newMessage.setImageBitmap(MediaStore.Images.Media.getBitmap(this.contentResolver, uri))
             imageView_newMessage.clipToOutline = true
         }
@@ -70,9 +74,25 @@ class NewMessageActivity : AppCompatActivity() {
 
     private fun backIntent(){
         val intentBack = Intent().putExtra(EXTRA_MESSAGE_BACK,
-            Message(editText_Name.text.toString(), editText_Message.text.toString(), null))
-            .putExtra(EXTRA_URI_BACK, uri)
+            Message(null,editText_Name.text.toString(), editText_Message.text.toString(), null))
+        if (uri != null)
+            intentBack.putExtra(EXTRA_URI_BACK, getRealPathFromURI(uri))
+
         setResult(1, intentBack)
         finish()
+    }
+
+    fun getRealPathFromURI(contentUri: Uri?): String? {
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor: Cursor = managedQuery(
+            contentUri,
+            proj,
+            null,
+            null,
+            null
+        )
+        val column_index: Int = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor.moveToFirst()
+        return cursor.getString(column_index)
     }
 }
