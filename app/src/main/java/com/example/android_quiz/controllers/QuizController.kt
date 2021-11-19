@@ -1,6 +1,7 @@
 package com.example.android_quiz.controllers
 
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -90,6 +91,7 @@ class QuizController {
 
         for (i in _arrayOfAnswerButtons.indices) {
             _arrayOfAnswerButtons[i].text = question.VarArray[i]
+            setButtonDrawable(_arrayOfAnswerButtons[i], R.drawable.shape_round20dp)
             _arrayOfAnswerButtons[i].setOnClickListener {
                 answerCheck(_arrayOfAnswerButtons[i])
             }
@@ -100,7 +102,6 @@ class QuizController {
         _parentActivity.correctAnnotation.updateLayoutParams<ConstraintLayout.LayoutParams> {
             endToEnd = view.id
             topToTop = view.id
-            marginEnd = 6
         }
 
         _currentQuestionNumber++
@@ -111,11 +112,13 @@ class QuizController {
             _correctAnswers++
             _parentActivity.correctAnnotation.backgroundTintList =
                 ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.correct))
+            setButtonDrawable(view, R.drawable.shape_round20dp_correct)
         }
-        else
+        else {
             _parentActivity.correctAnnotation.backgroundTintList =
                 ColorStateList.valueOf(_parentActivity.resources.getColor(R.color.incorrect))
-
+            setButtonDrawable(view, R.drawable.shape_round20dp_incorrect)
+        }
         actionButtonCondition(true)
     }
 
@@ -133,6 +136,11 @@ class QuizController {
         for (button in _arrayOfAnswerButtons)
             button.isEnabled = active
         _parentActivity.correctAnnotation.isVisible = !active
+    }
+
+    private fun setButtonDrawable(view: View, resource:Int)
+    {
+        ((view as Button).setBackgroundResource(resource))
     }
 
 

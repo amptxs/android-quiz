@@ -36,7 +36,7 @@
             app:layout_constraintEnd_toEndOf="@+id/quiz_var_a"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/quiz_var_a"
             style="@style/styledQuizVarButton"
             android:layout_width="0dp"
@@ -47,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/quiz_var_b"
             style="@style/styledQuizVarButton"
             android:layout_width="0dp"
@@ -58,7 +58,7 @@
             app:layout_constraintStart_toEndOf="@+id/quiz_var_a"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/quiz_var_c"
             style="@style/styledQuizVarButton"
             android:layout_width="0dp"
@@ -69,7 +69,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/quiz_var_a" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/quiz_var_d"
             style="@style/styledQuizVarButton"
             android:layout_width="0dp"

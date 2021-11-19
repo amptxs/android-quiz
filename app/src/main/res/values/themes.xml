@@ -43,13 +43,15 @@
         <item name="android:textSize">17sp</item>
     </style>
 
-    <style name="styledQuizVarButton" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/main_items_back</item>
+    <style name="styledQuizVarButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/shape_round20dp</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:background">@drawable/shape_round40dp</item>
+        <item name="android:layout_marginLeft">15sp</item>
+        <item name="android:layout_marginRight">5sp</item>
         <item name="android:layout_margin">3sp</item>
         <item name="android:textSize">14sp</item>
     </style>
+
 
     <style name="styledAttachImage" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/element_active</item>
