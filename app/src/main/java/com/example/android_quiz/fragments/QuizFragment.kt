@@ -28,13 +28,15 @@ class QuizFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
 
-        var test1 = Question()
-        var test2 = Question()
-        test1.Label = "В каком городе лисицы живут на окраинах и иногда появляются в центре?"
-        test2.Label = "test2"
-        QuestionsList.add(test1)
-        QuestionsList.add(test2)
-
+        var quizList = listOf<Question>(
+            Question("В каком городе лисицы живут на окраинах и иногда появляются в центре?", arrayOf("Архангельск", "Тюмень", "Рим", "Лондон"), 0),
+            Question("К какому семейству относятся лисы?", arrayOf("Псовые", "Лисьи", "Волчьи", "Собачьи"), 0),
+            Question("Какого цвета лапы у обыкновенной лисицы?", arrayOf("Рыжие", "Белые", "Темные", "Бурые"), 2),
+            Question("На какое животное внешне и по поведению похожа афганская лисица?", arrayOf("Собака", "Волк", "Кошка", "Куница"), 2),
+            Question("Какая лисица обитает в предгорьях Южных Гималаев?", arrayOf("Бенгальская", "Корсак", "Тибетская ", "Песчаная"), 0),
+        )
+        for (quiz in quizList)
+            QuestionsList.add(quiz)
     }
 
     override fun onCreateView(
