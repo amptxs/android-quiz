@@ -2,6 +2,7 @@ package com.example.android_quiz.adapters
 
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,11 +23,13 @@ class RecyclerViewChatAdapter: RecyclerView.Adapter<RecyclerViewChatAdapter.View
                 message_name.text = model.Name
                 if (model.Image == null)
                     message_image.isGone = true
-                else
+                else {
+                    message_image.isGone = false
                     message_image.setImageBitmap(MediaStore.Images.Media.getBitmap(context.contentResolver, Uri.fromFile(
                         File(model.Image)
-                    )))
+                    )))}
                 message_image.clipToOutline = true
+
             }
         }
     }
@@ -48,8 +51,15 @@ class RecyclerViewChatAdapter: RecyclerView.Adapter<RecyclerViewChatAdapter.View
         this.items = items
     }
 
-    fun add(message: Message){
+    fun addToBottom(message: Message){
         this.items.add(0, message)
+        notifyItemInserted(0)
     }
+
+    fun addToTop(message: Message){
+        this.items.add(message)
+        notifyItemInserted(items.size)
+    }
+
 
 }

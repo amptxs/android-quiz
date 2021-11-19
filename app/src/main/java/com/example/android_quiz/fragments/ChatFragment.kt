@@ -5,9 +5,11 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginStart
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.AutoMigration
 import androidx.room.Database
@@ -18,6 +20,7 @@ import com.example.android_quiz.DAO.MessageDAO
 import com.example.android_quiz.adapters.RecyclerViewChatAdapter
 import com.example.android_quiz.models.Message
 import kotlinx.android.synthetic.main.fragment_chat.*
+import java.util.*
 
 
 class ChatFragment : Fragment() {
@@ -25,6 +28,7 @@ class ChatFragment : Fragment() {
     private val recyclerAdapter by lazy{
         RecyclerViewChatAdapter()
     }
+
     private val dataBase by lazy {
         Room.databaseBuilder(
             requireContext(),
@@ -38,14 +42,20 @@ class ChatFragment : Fragment() {
         abstract fun messageDAO(): MessageDAO
     }
 
+    private var loadedPosition: Int = 0
+    private val loadedAtTime: Int = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
-        val messages = dataBase.messageDAO().getAll()
+        val messages = dataBase.messageDAO().getFromTail(2)
+        Collections.reverse(messages)
+        loadedPosition = messages[0].uid!!.toInt()
+
         for (message in messages)
-            recyclerAdapter.add(message)
+            recyclerAdapter.addToBottom(message)
+
        }
 
     override fun onCreateView(
@@ -59,6 +69,8 @@ class ChatFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        swipe_layout.setProgressBackgroundColorSchemeColor(resources.getColor(R.color.element_active))
+
         chatContainer.apply {
             adapter= recyclerAdapter
             layoutManager= LinearLayoutManager(
@@ -66,6 +78,19 @@ class ChatFragment : Fragment() {
                 LinearLayoutManager.VERTICAL,
                 true
             )
+        }
+
+        swipe_layout.setOnRefreshListener {
+            val messages = dataBase.messageDAO().getByPosition(loadedPosition-loadedAtTime,loadedPosition-1)
+
+            if (messages.isNotEmpty())
+                loadedPosition = messages[messages.size-1].uid!!.toInt()
+
+            for (message in messages)
+                recyclerAdapter.addToTop(message)
+
+            swipe_layout.isRefreshing = false
+
         }
     }
 
@@ -99,7 +124,7 @@ class ChatFragment : Fragment() {
                 if (data?.extras!!.get(EXTRA_URI_BACK) != null) {
                     message.Image = data?.extras!!.get(EXTRA_URI_BACK) as String
                 }
-                recyclerAdapter.add(message)
+                recyclerAdapter.addToBottom(message)
                 dataBase.messageDAO().insertAll(message)
             }
         }
